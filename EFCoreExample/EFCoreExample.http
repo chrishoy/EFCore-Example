@@ -1,0 +1,29 @@
+@BaseAddress = https://localhost:7254
+
+# Get All Users
+GET {{BaseAddress}}/api/users
+Accept: application/json
+###
+
+# Get User by ID
+GET {{BaseAddress}}/api/users/1
+Accept: application/json
+###
+
+# Create User
+POST {{BaseAddress}}/api/users
+Content-Type: application/json
+{
+    "name": "Chris 2",
+    "email": "chris2@example.com"
+}
+###
+
+# Create User
+DELETE {{BaseAddress}}/api/users/1
+Accept: */*
+###
+
+GET {{BaseAddress}}/weatherforecast
+Accept: application/json
+###
