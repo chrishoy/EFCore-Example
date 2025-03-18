@@ -1,4 +1,6 @@
+using EFCoreExample.Converters;
 using EFCoreExample.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers();
+
+// Register the OptionJsonConverter for all Option<T> types
+builder.Services.Configure<JsonOptions>(options =>
+{
+    // Add other converters if needed
+    options.JsonSerializerOptions.Converters.Add(new OptionJsonConverter<int>());
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
